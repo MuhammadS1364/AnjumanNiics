@@ -219,12 +219,14 @@
         
         <div>
           <label for="Pro_Date">Program Date</label>
-          <input type="date" name="data[Date]" id="Pro_Date" required>
+            <input type="hidden" name="data[Date]" id="FinalDate">
+
+            <input type="date" id="Pro_Date" required>
         </div>
 
         <div style="margin-top: 20px;">
           <label for="Wing">Submitting Wing</label>
-          <select name="data[Wing_Name]" id="Wing" disabled required>
+          <select name="data[Wing Name]" id="Wing"required>
             <option value="">Select...</option>
           </select>
         </div>
@@ -241,7 +243,7 @@
 
         <div style="margin-bottom: 15px;">
           <label for="Poster">Program Poster</label>
-          <input type="file" name="data[poster]" id="Poster">
+          <input type="file" name="data[Poster]" id="Poster">
         </div>
 
         <div style="margin-bottom: 15px;">
@@ -266,7 +268,7 @@
           <div class="form-row">
             <div class="form-col">
               <label>First Holder Class</label>
-              <select id="h1_class" onchange="loadStudents(this.value,'list1')" required>
+              <select id="h1_class" name="data[First Holder Class]" onchange="loadStudents(this.value,'list1')" required>
                 <option value="" disabled selected>Select Class</option>
                 <option value="U7">Class U7</option>
                 <option value="U6">Class U6</option>
@@ -279,7 +281,7 @@
             </div>
             <div class="form-col">
               <label>First Holder Name</label>
-              <input type="text" name="data[First_Holder]" id="firstHolder" list="list1" required>
+              <input type="text" name="data[First Holder]" id="firstHolder" list="list1" required>
               <datalist id="list1"></datalist>
             </div>
           </div>
@@ -288,7 +290,7 @@
           <div class="form-row">
             <div class="form-col">
               <label>Second Holder Class</label>
-              <select id="h2_class" onchange="loadStudents(this.value,'list2')">
+              <select id="h2_class" name="data[SecondHolder Class]" onchange="loadStudents(this.value,'list2')">
                 <option value="" disabled selected>Select Class</option>
                 <option value="U7">Class U7</option>
                 <option value="U6">Class U6</option>
@@ -301,7 +303,7 @@
             </div>
             <div class="form-col">
               <label>Second Holder Name</label>
-              <input type="text" name="data[Second_Holder]" id="secondHolder" list="list2">
+              <input type="text" name="data[Second Holder]" id="secondHolder" list="list2">
               <datalist id="list2"></datalist>
             </div>
           </div>
@@ -310,7 +312,7 @@
           <div class="form-row">
             <div class="form-col">
               <label>Third Holder Class</label>
-              <select id="h3_class" onchange="loadStudents(this.value,'list3')">
+              <select id="h3_class" name="data[Third  Holder Class]" onchange="loadStudents(this.value,'list3')">
                 <option value="" disabled selected>Select Class</option>
                 <option value="U7">Class U7</option>
                 <option value="U6">Class U6</option>
@@ -323,7 +325,7 @@
             </div>
             <div class="form-col">
               <label>Third Holder Name</label>
-              <input type="text" name="data[Third_Holder]" id="thirdHolder" list="list3">
+              <input type="text" name="data[Third Holder]" id="thirdHolder" list="list3">
               <datalist id="list3"></datalist>
             </div>
           </div>
@@ -442,7 +444,8 @@
     { name: "Math & Science Wing", username: "math", password: "123" },
     { name: "General Knowledge Wing", username: "gk", password: "123" },
     { name: "Tazkiya Wing", username: "tazkiya", password: "123" },
-    { name: "Sport Club", username: "sport", password: "123" }
+    { name: "Sport Club", username: "sport", password: "123" },
+    { nmae: "IEH", username: "ieh", password: 'ieh'},
   ];
 
   // Student Data (Updated with U6, U4, U2)
@@ -587,6 +590,22 @@
       ErrorBox.style.display = 'block';
       return;
     }
+
+
+    // data issu resolved 
+    document.getElementById("sheetdb-form").addEventListener("submit", function () {
+  const dateInput = document.getElementById("Pro_Date").value;
+
+  // Convert to DD-MM-YYYY
+  const d = new Date(dateInput);
+  const formatted =
+    String(d.getDate()).padStart(2, '0') + "-" +
+    String(d.getMonth() + 1).padStart(2, '0') + "-" +
+    d.getFullYear();
+
+  document.getElementById("FinalDate").value = formatted;
+});
+
 
     const btn = document.getElementById('submit-btn');
     btn.disabled = true;
