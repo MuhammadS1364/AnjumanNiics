@@ -1,8 +1,9 @@
+import LoginGetWay from './Components/LoginPage/GetWay'; // Relative path
 
-export default function App (){
+export default function App() {
   return (
     <div>
-      <h1>we are Building Anjumane Web </h1>
+      <LoginGetWay />
     </div>
-  )
+  );
 }
