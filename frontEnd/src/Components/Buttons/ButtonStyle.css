@@ -1,0 +1,17 @@
+
+
+button{
+    padding: 5px 10px;
+    background: #4070F4;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: bolder;
+    transition: .5s;
+}
+
+button:hover{
+    background: #ffffff;
+    color: #4070F4;
+    border: 1px solid #4070F4;
+    transition: .5s;
+}

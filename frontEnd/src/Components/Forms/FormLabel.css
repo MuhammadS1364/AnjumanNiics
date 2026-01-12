@@ -1,0 +1,24 @@
+:root{
+    --formBg : #FFFFFF;
+    --inputBorderColor : #b9b9b9;
+    --inputButtonBg: #4070F4;
+    --FormHeading: #422E2C;
+    --inputText : ;
+    --LightBule : #ECF0FE;
+}
+.form-row{
+    width: 100%;
+    padding: 5px;
+}
+input{
+    border: 1px solid var(--inputBorderColor);
+    border-radius: 12px;
+    padding: 10px 15px;
+    background: var(--formBg);
+    outline: none;
+    box-shadow: 2px 3px 3px 2px var(--LightBule);
+
+}
+input:focus{
+    border: 1px solid var(--inputButtonBg);
+}

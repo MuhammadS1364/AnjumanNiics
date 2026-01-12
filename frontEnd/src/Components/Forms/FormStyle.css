@@ -1,0 +1,24 @@
+:root{
+    --formBg : #FFFFFF;
+    --inputBorderColor : #b9b9b9;
+    --inputButtonBg: #4070F4;
+    --FormHeading: #422E2C;
+    --inputText : ;
+    --LightBule : #ECF0FE;
+}
+form{
+    width: 90%;
+    max-width: 500px;
+    padding: 10px 15px;
+    background:var(--formBg) ;
+    box-shadow: 2px 3px 3px 2px var(--LightBule);
+    box-sizing:content-box;
+    border-radius: 15px;
+
+}
+.formHead{
+    width:fit-content;
+    font-size: 22px;
+    text-align: left;
+    border-bottom:2px solid var(--inputButtonBg) ;
+}
