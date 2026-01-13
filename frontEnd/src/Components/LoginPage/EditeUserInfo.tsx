@@ -9,15 +9,45 @@
 import { MySupaBase } from "../../SupaBase";
 
 import { useState } from "react";
-export default function LoginGetWay(){
+export default function EditeUserInfo(){
 
     const [UserName, setUserName ] = useState('');
     const [UserEmail, setUserEmail ] = useState('');
     const [UserPass, setUserPass ] = useState('');
     const [UserRole, setUserRole ] = useState('');
 
-    const [isSuccess, setSuccess] = useState('')
+    const [isSuccess, setSuccess] = useState(false)
     const [Message, setMessage] = useState('')
+
+
+    // getting all the previous data
+
+    const fetchData  = async () =>{
+        try{
+            const {data, error} = await MySupaBase
+            .from("MyUsers")
+            .select("*")
+            .eq("UserEmail", UserEmail)
+            .single();
+
+
+            setUserName(data.UserName)
+            setUserName(data.userEmail)
+            setUserName(data.userPassWord)
+            setUserName(data.userRole)
+
+
+            
+        }catch(error){
+            console.log(error);
+            
+        }finally{
+            setSuccess(true)
+        }
+    }
+
+
+
 
     const SubmitHandler = async (event) =>{
         event.preventDefault();
@@ -25,17 +55,20 @@ export default function LoginGetWay(){
         inputsBox.map((box)=>{
             console.log(box);
         })
+
         try{
             const {data , error} = await MySupaBase
             .from("MyUsers")
-            .insert([
+            .update([
                 {
                     userEmail: UserEmail,
                     userName : UserName,
                     userPassWord : UserPass,
                     userRole : UserRole
                 }
-            ]).select();
+            ])
+            .eq("UserEmail", UserEmail)
+            .select();
 
             if (error) setMessage(`Error: ${error.message}`)
 
@@ -43,7 +76,7 @@ export default function LoginGetWay(){
             setUserName('')
             setUserRole('')
             setUserPass('')
-            setMessage("User Info Added Successfully.")
+            setMessage("User Info Updated Successfully.")
         }catch(error){
             console.log(error)
         }finally{
