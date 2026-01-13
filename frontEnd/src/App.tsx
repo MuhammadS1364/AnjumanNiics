@@ -6,8 +6,8 @@ import WingDashBoard from './Components/WingDashBoard/WingDashBoard';
 
 export default function App() {
   return (
-    <div>
+    <main>
       <AdminDashBoard />
-    </div>
+    </main>
   );
 }

@@ -1,0 +1,35 @@
+:root{
+    --formBg : #FFFFFF;
+    --inputBorderColor : #b9b9b9;
+    --inputButtonBg: #4070F4;
+    --FormHeading: #422E2C;
+    --inputText : ;
+    --LightBule : #ECF0FE;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+section{
+    width: 100%;
+    max-width: 1450px;
+    height: 100vh;
+    background: var(--LightBule);
+}
+
+#Dashboard{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+.NabBar{
+    width: 30%;
+    border: 1px solid var(--inputBorderColor);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
