@@ -10,7 +10,6 @@ export default function OrderList({names}){
                 )
             })}   
             </ol>
-
         </div>
     )
 }
