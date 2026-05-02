@@ -13,6 +13,7 @@ import StudentManager from '../Student/StudentPanel';
 import AddNewStudent from './NewStudent';
 import AllStudentsList from './StudentsList';
 
+import AddNewTeacher from './NewTeacher';
 
 
 export default function AdminDashBoard() {
@@ -44,6 +45,7 @@ export default function AdminDashBoard() {
           <Link to="/admin-dashboard/login" onClick={() => setIsMenuOpen(false)} className="block p-3 rounded-lg hover:bg-slate-800 transition">Login</Link>
           <Link to="/admin-dashboard/new-student" onClick={() => setIsMenuOpen(false)} className="block p-3 rounded-lg hover:bg-slate-800 transition">Add Student</Link>
           <Link to="/admin-dashboard/all-student" onClick={() => setIsMenuOpen(false)} className="block p-3 rounded-lg hover:bg-slate-800 transition">All Student</Link>
+          <Link to="/admin-dashboard/new-teacher" onClick={() => setIsMenuOpen(false)} className="block p-3 rounded-lg hover:bg-slate-800 transition">Add Teacher</Link>
 
           <button 
         onClick={handleLogout} 
@@ -75,6 +77,7 @@ export default function AdminDashBoard() {
               <Route path="wing-grid" element={<WingGrid />} />
               <Route path="new-student" element={<AddNewStudent />} />
               <Route path="all-student" element={<AllStudentsList />} />
+              <Route path="new-teacher" element={<AddNewTeacher />} />
             </Routes>
           </div>
         </main>

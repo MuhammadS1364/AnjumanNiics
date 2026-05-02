@@ -1,9 +1,11 @@
+
+
 import FormLabel from "../Components/FormLabel";
 import DropDown from "../Components/DropDown";
 import { useState } from "react";
 import { SupaBaseClient } from "../lib/SupaBase";
 
-export default function AddNewStudent() {
+export default function AddNewTeacher() {
   const StateList = ['Bihar', 'Jharkhand', 'Assam', 'Tripura', 'Maharashtra', 'Andhra Pradesh', 'Karnataka', 'Kerala', 'Uttar Pradesh', 'Chhattisgarh'];
   const [message, setMessage] = useState({ text: "", type: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -14,8 +16,8 @@ export default function AddNewStudent() {
     setMessage({ text: "", type: "" });
 
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("StudentEmail");
-    const admissionNo = formData.get("StudentAddNo");
+    const email = formData.get("TeacherEmail");
+    const teacherId = formData.get("TeacherId");
 
     try {
       // 1. Check for Duplicate User
@@ -26,16 +28,16 @@ export default function AddNewStudent() {
         .single();
 
       if (existingUser) {
-        throw new Error("Student with this email already exists.");
+        throw new Error("Teacher with this email already exists.");
       }
 
       // 2. Create User Credentials
-      const { data: newUser, error: userError } = await SupaBaseClient
+      const { data: newTeacher, error: userError } = await SupaBaseClient
         .from("UsersTable")
         .insert([{
           UserEmail: email,
-          UserPassword: admissionNo,
-          UserRole: "Student"
+          UserPassword: teacherId,
+          UserRole: "Teacher"
         }])
         .select() // This allows you to get the data back
         .single();
@@ -44,22 +46,21 @@ export default function AddNewStudent() {
 
       // 3. Create Student Profile
       const { error: stnError } = await SupaBaseClient.from("NCMS_STUDENTS").insert([{
-        StudentEmail: email,
-        StudentAddNo: admissionNo,
-        StudentName: formData.get("StudentName"),
-        StudentFather: formData.get("StudentFather"),
-        FatherJob: formData.get("FatherJob"),
-        StudentClass: formData.get("StudentClass"),
-        StudentImage: formData.get("StudentImage"), // Note: This usually needs Supabase Storage upload first
-        StudentState: formData.get("StudentState"),
+        TeacherEmail: email,
+        TeacherId: teacherId,
+        TeacherName: formData.get("TeacherName"),
+        TeacherPhone: formData.get("TeacherPhone"),
+        TeacherImage: formData.get("TeacherImage"), // Note: This usually needs Supabase Storage upload first
+        TeacherState: formData.get("TeacherState"),
         District: formData.get("District"),
         villege: formData.get("villege"),
-        StudentUser: newUser.UserEmail
+        TeacherUser: newTeacher.UserEmail,
+        IsClassTeacher : formData.get("villege") || false
       }]);
 
       if (stnError) throw stnError;
 
-      setMessage({ text: "Student registered successfully!", type: "success" });
+      setMessage({ text: "Teacher registered successfully!", type: "success" });
       e.target.reset();
     } catch (err) {
       setMessage({ text: err.message, type: "error" });
@@ -71,7 +72,7 @@ export default function AddNewStudent() {
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
       <form onSubmit={handleSubmit} className="w-full max-w-md bg-white p-8 rounded-xl shadow-md flex flex-col gap-4">
-        <h1 className="text-3xl text-center font-bold text-blue-600 mb-2">New Student</h1>
+        <h1 className="text-3xl text-center font-bold text-blue-600 mb-2">New Teacher</h1>
 
         {message.text && (
           <div className={`p-3 rounded-lg text-sm font-medium text-center ${message.type === "success" ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
@@ -80,14 +81,12 @@ export default function AddNewStudent() {
           </div>
         )}
 
-        <FormLabel PlaceHolder="Student Admission No" Name="StudentAddNo" Tpye="text" />
-        <FormLabel PlaceHolder="Student Name" Name="StudentName" Tpye="text" />
-        <FormLabel PlaceHolder="Student Email" Name="StudentEmail" Tpye="email" />
-        <FormLabel PlaceHolder="Student Image URL" Name="StudentImage" Tpye="file" />
-        <FormLabel PlaceHolder="Student Class" Name="StudentClass" Tpye="text" />
-        <FormLabel PlaceHolder="Student Father" Name="StudentFather" Tpye="text" />
-        <FormLabel PlaceHolder="Father Job" Name="FatherJob" Tpye="text" />
-        <DropDown Lable="Student State" OptionsList={StateList} Name="StudentState" />
+        <FormLabel PlaceHolder="Teacher Id" Name="TeacherId" Tpye="text" />
+        <FormLabel PlaceHolder="Teacher Name" Name="TeacherName" Tpye="text" />
+        <FormLabel PlaceHolder="Teacher Email" Name="TeacherEmail" Tpye="email" />
+        <FormLabel PlaceHolder="Teacher Phone" Name="TeacherPhone" Tpye="text" />
+        <FormLabel PlaceHolder="Teacher Image URL" Name="TeacherImage" Tpye="file" />
+        <DropDown Lable="Teacher State" OptionsList={StateList} Name="TeacherState" />
         <FormLabel PlaceHolder="District" Name="District" Tpye="text" />
         <FormLabel PlaceHolder="Village" Name="villege" Tpye="text" />
 
