@@ -1,0 +1,3 @@
+Excel Upload: User se file lekar xlsx.read() use karke data ko Supabase database mein save kar sakte hain.
+Excel Download: Database se data lekar xlsx.utils.json_to_sheet() se Excel file generate karke download karwa sakte hain.
+PDF Creation: jspdf se aap table ya report ko "Export as PDF" button ke click par download karwa sakte hain.
